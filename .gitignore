@@ -1,0 +1,31 @@
+#配置不添加到git仓库的文件
+
+#package file
+*.jar
+*.class
+*.war
+
+#maven ignore
+target/
+src/test/
+
+#idea ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+
+#eclipse ignore
+.classpath
+.project
+.settings/
+
+#vscode ignore
+.vscode/
+
+#temp file
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
