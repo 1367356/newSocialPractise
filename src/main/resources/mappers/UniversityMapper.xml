@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="socialP.dao.UniversityMapper" >
+  <resultMap id="BaseResultMap" type="socialP.pojo.dao.University" >
+    <constructor >
+      <idArg column="university_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="university" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    university_id, university
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from university
+    where university_id = #{universityId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from university
+    where university_id = #{universityId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="socialP.pojo.dao.University" >
+    insert into university (university_id, university)
+    values (#{universityId,jdbcType=INTEGER}, #{university,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="socialP.pojo.dao.University" >
+    insert into university
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="universityId != null" >
+        university_id,
+      </if>
+      <if test="university != null" >
+        university,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="universityId != null" >
+        #{universityId,jdbcType=INTEGER},
+      </if>
+      <if test="university != null" >
+        #{university,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="socialP.pojo.dao.University" >
+    update university
+    <set >
+      <if test="university != null" >
+        university = #{university,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where university_id = #{universityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="socialP.pojo.dao.University" >
+    update university
+    set university = #{university,jdbcType=VARCHAR}
+    where university_id = #{universityId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="socialP.dao.DocumentMapper" >
+  <resultMap id="BaseResultMap" type="socialP.pojo.dao.Document" >
+    <constructor >
+      <idArg column="document_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="student_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="team_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_time" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="document_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="document_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="document_u_r_l" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="content" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    document_id, student_id, team_id, create_time, document_status, document_type, document_u_r_l, 
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from document
+    where document_id = #{documentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from document
+    where document_id = #{documentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="socialP.pojo.dao.Document" >
+    insert into document (document_id, student_id, team_id, 
+      create_time, document_status, document_type, 
+      document_u_r_l, content)
+    values (#{documentId,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, #{teamId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=DATE}, #{documentStatus,jdbcType=INTEGER}, #{documentType,jdbcType=VARCHAR}, 
+      #{documentURL,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="socialP.pojo.dao.Document" >
+    insert into document
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="documentId != null" >
+        document_id,
+      </if>
+      <if test="studentId != null" >
+        student_id,
+      </if>
+      <if test="teamId != null" >
+        team_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="documentStatus != null" >
+        document_status,
+      </if>
+      <if test="documentType != null" >
+        document_type,
+      </if>
+      <if test="documentURL != null" >
+        document_u_r_l,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="documentId != null" >
+        #{documentId,jdbcType=INTEGER},
+      </if>
+      <if test="studentId != null" >
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="teamId != null" >
+        #{teamId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="documentStatus != null" >
+        #{documentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="documentType != null" >
+        #{documentType,jdbcType=VARCHAR},
+      </if>
+      <if test="documentURL != null" >
+        #{documentURL,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="socialP.pojo.dao.Document" >
+    update document
+    <set >
+      <if test="studentId != null" >
+        student_id = #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="teamId != null" >
+        team_id = #{teamId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="documentStatus != null" >
+        document_status = #{documentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="documentType != null" >
+        document_type = #{documentType,jdbcType=VARCHAR},
+      </if>
+      <if test="documentURL != null" >
+        document_u_r_l = #{documentURL,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where document_id = #{documentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="socialP.pojo.dao.Document" >
+    update document
+    set student_id = #{studentId,jdbcType=INTEGER},
+      team_id = #{teamId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=DATE},
+      document_status = #{documentStatus,jdbcType=INTEGER},
+      document_type = #{documentType,jdbcType=VARCHAR},
+      document_u_r_l = #{documentURL,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR}
+    where document_id = #{documentId,jdbcType=INTEGER}
+  </update>
+</mapper>
